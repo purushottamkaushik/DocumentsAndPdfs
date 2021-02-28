@@ -1,0 +1,18 @@
+show databases;
+create database hibernatetest;
+drop database hibernate_test;
+show databases;
+use hibernatetest;
+show tables;
+desc student_table;
+create table student_table(
+	sid int primary key,
+    student_name varchar(20),
+    student_fee numeric(10,2),
+    age int
+);
+select * from student_table;
+
+=============================================
+
+

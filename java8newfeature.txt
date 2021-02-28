@@ -1,0 +1,1427 @@
+Lambda Expression
+Functional Interface
+Annoymous Inner class VS Lambda Expression
+
+
+Comparator ==> functional interface 
+			contains compare method
+			
+			compare(Object obj1 , Object obj2) { 
+				return -ve iff obj1 has to come before obj2 ,
+				return +ve iff obj1 has to come after obj1 ,
+				return 0 iff obj1 and obj2 are equal.
+			}
+			
+based on the ascending order of employee numbers.
+(e1,e2) ->(e1.eno <e2.eno) ? -1 : (e1.eno>e2.eno) ? 1 : 0 	
+
+
+based on the alphabetical order of the employeeName .		
+(e1,e2) -> e1.name.compareTo(e2.name)
+
+
+class Employee {
+	String name ;
+	int eno;
+	Employee (String name , int eno) {
+		this.name = name;
+		this.eno = eno;
+	}
+	
+	public String toString() {
+		return this.eno + "  "  + this.name ;
+	}
+	
+}
+
+
+class Test {
+	public static void main(String[] args) {
+		Employee e = new Employee("Durga",100);
+		System.out.println(e); // Employee@HASHCODE because toString() method is not overridden in Employee class
+		
+		ArrayList<Employee> lst = new ArrayList<Employee>();
+		lst.add(new Employee("DUrga",1233));
+		lst.add(new Employee("DUrga1",12332));
+		lst.add(new Employee("Chinny",121));
+		
+		System.out.println(lst); // Proper printing of all the employees 
+		// (e1,e2) ->(e1.eno <e2.eno) ? -1 : (e1.eno>e2.eno) ? 1 : 0 
+		Collections.sort(lst,(e1,e2) ->(e1.eno <e2.eno) ? -1 : (e1.eno>e2.eno) ? 1 : 0 );
+		System.out.println(lst);
+		
+		// (e1,e2) -> e1.name.compareTo(e2.name)
+		Collections.sort(lst , (e1,e2) -> e1.name.compareTo(e2.name));
+		System.out.println(lst)
+				
+	}
+}
+
+=================================================================================================================
+Annoymous Inner Class VS Lambda Expression
+
+Thread t = new Thread(); // Creating a thread object 
+
+Thread th = new Thread() {
+	........
+	.......
+	// Annoymous Inner Class 
+} ;
+// We are writing a class which extends the Thread class which doesnt have any name , it  is called annoymous Inner class.
+// It Doesnt have any name thats why its called annoymous Inner class 
+
+
+
+Runnable r = new Runnable() ; // Invalid because Runnable is an interface 
+
+// Its a child class of the Runnable interface 
+Runnable r  = new Runnable() {
+   ....
+   ....
+   // Annoymous Inner class 
+};
+===========================================================================
+
+// Whenever we are required to create object of any interface for instant use .
+
+class Test {
+	public static void main(String[] args) {
+		Runnable r  = new Runnable() { // Object of Implementation class of Runnable Interface.
+			// providing implementation of the run method
+		  public void run() {
+			for(int i =0;i<10;i++ ){
+				System.out.println("Child Thread  :   " + i ); 
+			}
+		}
+		  
+	 }
+
+		Thread th = new Thread(r) ;
+		t.start() ; // Will be executed by child thread.
+	
+		for(int i =0;i<10;i++ ) {
+			System.out.println("From main thread  : " + i ); 
+		}
+	}
+}
+
+// Annoymous inner class only implements Functional interface  which can be easily replaced with lambda expression ,
+so the above example becomes . 
+
+
+class Test {
+	public static void main(String[] args) {
+		Runnable r  = () -> { // Annoymous Inner class replaced with lambda expression.
+						for(int i =0;i<10;i++ ){
+				System.out.println("Child Thread  :   " + i ); 
+			}
+		};
+		  
+	 	Thread th = new Thread(r) ;
+		t.start() ; // Will be executed by child thread.
+	
+		for(int i =0;i<10;i++ ) {
+			System.out.println("From main thread  : " + i ); 
+		}
+	}
+}
+
+// Annoymous Inner class is more Powerful than Lambda Expression.
+
+interface A {
+	m1() ;
+	m2() ;
+} // We can not use lambda expression because it requires only functional interface to use.
+
+ // Annonymous Inner class which implements A Interface
+A a = new A() {
+	public void m1() {} 
+	public void m2() {} 
+};
+
+
+Annonymous Innner class can be used instead of lambda expression but vice versa is not possible. 
+
+If annoymous inner class implements an interface which only has only one single abstract method then
+only we can replace that annoymous inner class by lambda expression.
+
+
+=========================================================================================================================\
+Lambda Expression
+Functional Interface
+Annonymous Inner class vs Lambda Expression
+
+==============================================================================
+Annoymous Inner class can extend a normal class
+Annoymous Inner class can extend a abstract class.
+Annoymous Inner class can implement a interface which contain any number of abstract methods .
+
+Lambda Expression only applicable for Functional interfaces . (Lambda Expressions enables Functional Programming in java.)
+=============================================================================================================================
+
+Default methods in Java : Introduced in java 8.
+
+From 1.8 version default methods are also introduced in java 1.8
+
+====> Untill 1.7 version every method in the interface in by default public and abstract .
+	void m1() ;
+	public void m1() ;
+	abstract void m1() ;
+	public abstract void m1() ;
+		
+	These all methods are by default public and abstract .
+	
+Related methods: 
+1.8 V: default methods + static methods.
+1.9 V: private methods.	
+
+Variables : The variables are by default public static final variables ...
+
+
+Default method  |  Virtual Extension Method  |  Defender Method 
+=================================================================
+This is the most powerful enhancement made in java 8
+
+interface I {
+	public void m1();
+	public void m2();
+}
+
+
+class Test1 implements I {
+	// Two methods implementations must be provided 
+	
+	public void m1() {}
+	public void m2() {}
+	
+}
+
+class Test2 implements I {
+	// Two methods implementations must be provided 
+	
+	public void m1() {}
+	public void m2() {}
+	
+}
+
+class Test3 implements I {
+	// Two methods implementations must be provided 
+	public void m1() {}
+	public void m2() {}
+	
+}
+
+// What if i add one more method in the interface ? The all the classes must implement or not ?  Yes compile Time Error 
+Once we defined a interface and all the implementation are implemented then all the codes are effected .
+
+Instead of effecting the implementation classes we are adding default method which solves the problem
+
+
+
+class Test1 implements I {
+	// Two methods implementations must be provided 
+	
+	public void m1() {}
+	public void m2() {}
+		
+	// default method  provided by the 
+    //	interface if any implementation class is not satisfied by 
+	//the implementation they can override 
+	//if will be by default inherited in all the  implementations classese
+	
+	default void m3() {
+	     ..... 
+		 .....
+		  .....
+		System.out.println("Default method without effecting the implementation classes ");  
+	}
+}
+
+class Test2 implements I {
+	// Two methods implementations must be provided 
+	
+	public void m1() {}
+	public void m2() {}
+	
+}
+
+class Test3 implements I {
+	// Two methods implementations must be provided 
+	public void m1() {}
+	public void m2() {}
+	
+}
+
+This biggest advantage is without effecting the implementation classes if we want to add new method
+to the interface ==> Default methods.
+==========================================================
+
+interface Interf {
+	default void m2() {
+		System.out.println("Default Method");
+	}
+} 
+
+default keyword : because implementation is already available.
+
+class Test implements Interf {
+
+		public void m2() {
+			System.out.println("Overriding all default method implementation ");
+		}
+		
+	public static void main(String[] args) {
+		Test t = new Test() ;
+		t.m1() ;
+	} 
+} 
+
+It defends all the implementation classes and as they dont have to worry about the implementation of the method and is 
+provided by default by the interface.
+
+default method is only inside the interface but not inside the class because inside a class it is treated as a modifier 
+in class
+
+default int hashcode() { // Invalid because its bydefault hashcode() method is present inside the Object class and Test class 
+						// Already has hashcode() code method of the object class .	
+	return 10;
+} 
+
+
+Conclusion : Object class methods we are not allowed declare as default methods inside the interface. This provide compile time 
+error.
+
+Example : 
+interface Interf {
+	default void m1() {}
+
+	default int hashcode() { }	
+} 
+
+class Test implements Interf {
+	// It will throw an compile time error .
+}
+
+==========================
+
+Java Supports Multiple Inheritance or not ? 
+===> Due to ambiguity problem or simple diamond problem  
+		P1.m1()                    P2.m1() 
+	   
+                  C.m1()
+
+Here P1 and P2 are parent classes , and C is the child class
+========================================================================
+
+interface Left {
+	default void m1() { System.out.println("left interface m1() method ");}
+}
+interface Right {
+	default void m1() { System.out.println("Right interface m1() method ");}
+}
+
+class Test implements Left , Right{
+	public static void main(String[] args) {
+		
+	}
+} 
+Compile Time Error: 
+// Unrelated interface defaults  
+=========================================================
+Solution : Override the m1() method in child class 
+
+interface Left {
+	default void m1() { System.out.println("left interface m1() method ");}
+}
+interface Right {
+	default void m1() { System.out.println("Right interface m1() method ");}
+}
+
+class Test implements Left , Right{
+	
+	public void m1() {
+		//System.out.println("Our own Implementation of m1() method ");
+		// Left.super.m1() ;  
+		// Interfacename.super.defaultMethodName(); here super is compulsory to get access of the parent interface.
+		// Right.super.m1();	
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		Test t  = new Test();
+		t.m1();
+}
+}
+
+====================================================================================
+
+class VS interface 
+Class is a heavy weight component.
+Interface is a light weight component.
+
+class Test {
+
+	m1() {}
+	
+	main() {
+	Test t = new Test();
+	t.m1();
+	}
+}
+
+====> Static methods are no way related to object. If a static method is only required why we should create 
+	  an class and then create its object.
+	  
+	  We should create interface if only we are required to declare the static methods
+	  
+Example : 
+
+interface Interf {
+	public static void m1() {
+		System.out.println("Interface Static Method");
+	}
+}		
+
+
+class Test implements Interf { // 
+	
+	public static void main(String[] args) { 
+	     Interf.m1() ; // Valid ==> Directly by name Using interface name only.
+		 m1() ; // InValid  Inherited by Test class so directly called by name.
+		 Test.m1(); // InValid  static inherited method
+		 Test t = new Test();
+		 t.m1(); // InValid ===> Using object reference 		 
+	}
+}
+	  
+// To access interface static we must only use Interface name only....
+
+Q) Is it possible to declare main method inside the interface ?
+ Yes from java1.8 version onwards ===> because it is  a static method and it is allowed inside the interface in java 1.8
+ 
+ 
+ =======================================================================================================
+ IMP :::  To define general utility method we must go interface declare static methods inside the interface.
+ ===============================================================================================================
+ Without effecting the implementation classes if we want to add new methods to the
+ interface(Extending interface functionality). =====> default methods.
+
+=================================================================================================
+To define general utility methods we can define static utility methods
+==========================================================================================================
+
+
+Loopholes in Interface Static methods :
+1. The static methods are by default not available inside the implementation class or any other normal class. 
+
+Should be called using the InterfaceName only.
+
+interface Interf {
+	public static void m1() {
+		System.out.println("Interface Static Method");
+	}
+}
+
+
+class Test {  // or it implements Interf 
+	public static void main(String[] args) {
+		Interf.m1();
+	}
+}
+
+
+========================================================================================================
+Predefined Functional Interfaces in Java8 : 
+	Predicate 
+	Function
+	Consumer
+	Supplier
+
+Two arguement Predefined Functional Interfaces :
+ BiPredicate
+ BiFunction 
+ BiConsumer
+================================================
+primitive Functional interfaces
+	IntPredicate
+	IntFunction
+	IntConsumer
+	......
+=========================================================================
+Why Functional Interface ? For lambda expression
+
+Where all the predefined functional interfaces are present ?   java.util.function package
+===============================================================================================
+Predicate<T> : Functional Interface  to check boolean conditions
+		conditional checks 
+		
+		interface Predicate<T> {
+			public boolean test(T t);
+		}
+		
+		public abstract boolean test(T t) {}
+		
+		public boolean test(Integer I) {
+			if(I%2==0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+    Lambda for above test method 
+	
+	(Integer I) -> I%2==0;
+	I -> I%2==0;  // to check whether the given number is Even or not...
+	
+Example1:
+
+import java.util.function.*;	
+class Test implements Interf {
+	public static void main(String[] args){
+		Predicate<Integer> p1 = i->i%2==0;
+		System.out.println("p1.test  " + p1.test(10));
+		System.out.println("p1.test  " + p1.test(15));
+	}
+}
+
+Example2:	
+import java.util.function.*;	
+class Test implements Interf {
+	public static void main(String[] args){
+		Predicate<Employee> p1 = e-> e.salary > 10 && e.isEligible==true;
+		System.out.println("p1.test  " + p1.test(e1));
+		System.out.println("p1.test  " + p1.test(e2));
+	}
+}	
+
+
+
+===========================================================
+Example 3 : Write a predicate to check whether the length of string is greater than 10 or not ?
+
+	Predicate<String> p = s->s.length() >5;
+	System.out.println(p.test("Hello"));
+	System.out.println(p.test("Demo"));
+
+
+// Prediccate Realtime Example 	
+class Test {
+	public static void main(String[] args) {
+		String[] s = {"NAg" ,"Chiranjeevi" ,"Venkatesh" ,"Balliadh" , "Sunny" ,"KAtrina"};
+		Predicate<String> p = s -> s.length()%2==0;
+		
+		for(String s1 : s) {
+			if(p.test(s1)) {
+				System.out.println(s1);
+			}
+		}
+	}
+}	
+
+Input to the Predicate : String Input   , return type is always boolean 
+Input is varied from example to example thats why we have to give the type explicitly and its mandatory.
+
+======================================================================================================
+
+Example :
+
+
+import java.util.ArrayList;
+class Employee {
+	String name ;
+	double salary;
+	Employee(String name , double salary) {
+		this.name = name;
+		this.salary = salary;
+	}
+} 			
+
+class Test {
+	public static void main(String[] args) {
+		ArrayList<Employee> lst = new ArrayList<Employee>();
+		lst.add(new Employee("Durga",1000);
+		lst.add(new Employee("Durga1",2000);
+		lst.add(new Employee("Durga2",3000);
+		lst.add(new Employee("Durga3",4000);
+		lst.add(new Employee("Durga4",5000);
+		
+		Predicate<Employee> p = e->e.salary>3000;
+		
+		for(Employee emp : lst ) {
+			if(p.test(emp)){
+				System.out.println("Employee Name : " + emp.name  + "   salary :  " + emp.salary);
+			}
+		}
+	}
+}		
+// For conditional checking we use Predicate Functional Interface for using lambda expression.
+
+
+p1 -> to check whether a number is even or not 
+p2 -> to check whether a number is  > 10 or not 
+
+p1.and(p2).test(34);   // Predicate Joining 
+p1.or(p2).test(23); // Predicate 
+p1.negate()
+================================================
+
+import java.util.function.*;
+class Test {
+
+	public static void main(String[] args) {
+		int[] x = {0,5,10,15,20,25,30,35};
+		Predicate<Integer> p1 = i -> i%2==0;
+		Predicate<Integer> p2 = i -> i>10;
+		
+		System.out.println("The numbers which are even and > 10 are : " );
+		
+		for(int x1 : x ){
+			if(p1.and(p2)) {
+				System.out.println(x);
+			}
+			
+		}
+		
+		System.out.println("=====================");
+		for(int x1 : x ){
+			if(p1.or(p2)) {
+				System.out.println(x);
+			}
+			
+		}
+		
+		System.out.println("Number which are not even" );
+		for(int x1 : x ){
+			if(p1.negate.test(p2)) {
+				System.out.println(x);
+			}
+			
+		}
+		}
+}
+==
+======================================================================================================
+Input ----> perform some operation and produce some result =====> Function (need not be boolean type)
+i ----> i*i   
+s -----> s,length() 
+Also Function can return boolean value.
+
+
+
+
+
+======================================================================================================
+Function 
+
+input --> perform operation ---> output 
+4-----> square operation ----> 16
+
+Function is predefined Functional interface which accepts any input and provide some output of different type.
+
+interface Function<T,R> {
+	public R apply(T t ) ;
+}
+
+
+Example :
+
+class Test {
+	public static void main(String[] args) {
+		Function<Integer , Integer > f = i -> i*i;
+		//Function<Argument , ReturnType>
+		
+		System.out.println(f.apply(4));
+		System.out.println(f.apply(5));
+	} 	  
+ } 
+Based on the input performa some operation and return some ooutput .
+
+"durga"  ====> 5 
+String ======> Integer 
+
+
+class Test {
+	public static void main(String[] args) {
+		Function<Integer , Integer > f = i -> i*i;
+		//Function<Argument , ReturnType>
+		
+		System.out.println(f.apply(4)); // 16
+		System.out.println(f.apply(15)); // 225
+	} 	  
+ }
+
+// Take String as a Arguement and returns the string length.
+class Test {
+	public static void main(String[] args) {
+		Function<String , Integer > f = s -> s.length();
+		//Function<Argument , ReturnType>
+		
+		System.out.println(f.apply("Durga")); // 5
+		System.out.println(f.apply("Durgasoft")); // 9
+	} 	  
+ }
+
+
+
+// Function to return upperCase String
+class Test {
+	public static void main(String[] args) {
+		Function<String , String > f = s -> s.toUpperCase();
+		//Function<Argument , ReturnType>
+		
+		System.out.println(f.apply("Durga")); // DURGA
+		System.out.println(f.apply("Durgasoft")); // DURGASOFT
+	} 	  
+ }
+
+====================================
+
+
+// Function to find grade of the student
+>=80 ===> A [Distinction]
+>=60 ===> B [FC]
+>=50 ===> C [SC]
+>=35 ===> D [TC]
+
+class Student {
+	
+	String name;
+	int marks;
+
+	Student(String name , int marks) {
+	this.name = name;
+	this.marks = marks;
+
+	}
+
+
+
+}
+
+class Test {
+	public static void mai(String[] args) {
+
+		Function<Student , String> f = s->{
+			int marks = s.marks;
+			String grade="";
+			if(marks >= 80  ) {
+				grade="A[Distinction]";
+			} else if(marks>=60) {
+				grade="B[First class]"
+			} else if (marks>=50) {
+				grade="C[Second Class]";
+			} else if (marks>=35) {
+				grade="D[Third Class]";
+			} else {
+				grade="E[Failed]";
+			}
+			return grade;
+		}
+
+		Student[] s = {
+						new Student("Durga",100),
+						new Student("Sunny",65),
+						new Student("Bunny",55),
+						new Student("Chinny",45),
+						new Student("Vinny",20)
+		}
+
+		Predicate<Student> p = s->s.marks>60;	
+		for(Student s1  :s ){
+
+			if(p.test(s1)) {
+			System.out.println("Student Name  : " + s1.name);
+			System.out.println("Student Marks : " + s1.marks);
+			System.out.println("Student Grade : " + f.apply(s1));
+			System.out.println();
+ 
+			}
+			
+		}
+
+
+		for(Student s1 : s) {
+			if(p.test(s1)) {
+				c.accept(s1);
+			}
+		}
+
+	}
+
+}
+
+============================================================================================
+Accepts some input and perform some opertaion and not required to return anything ==> Consumer 
+In consumer chaining is possible.
+
+Example:
+	
+import java.util.function.*;
+
+class Movie {
+	String name;
+	Movie(String name) {
+		this.name = name;
+	}
+}	
+
+class Test {
+	public static void main(String[] args) {
+		Consumer<Movie> c1 = m -> System.out.println(m.name + " ready to release ");
+		Consumer<Movie> c2 = m -> System.out.println(m.name + " released but its bigger flop ");
+		Consumer<Movie> c3 = m -> System.out.println(m.name + " Already released");
+		
+		Movie m = new Movie("Spider");
+		c1.accept(m);
+		c2.accept(m);
+		c3.accept(m);
+		Consumer<Movie> cc  = c1.andThen(c2).andThen(c3); 
+		cc.accept(m);  // Calling all consumers in main consumer 	
+	}
+}	
+
+====> Just supply my required objects and it wont take any input ==>  Supplier 
+
+How to implement Supplier ? 
+
+
+interface Supplier<R> {
+	public R get();
+}
+It wont take any arguement , we are just supplying the data.
+with return type as R	
+
+
+Example :
+
+import java.util.function.*;
+import java.util.Date;
+
+
+class Test {
+	public static void main(String[] args) {
+		Supplier<Date> s = ()-> new Date();
+		System.out.println(s.get());
+		System.out.println(s.get());
+		System.out.println(s.get());
+	}	
+}
+
+Supplier for Random OTP generation
+
+class Test {
+	public static void main(String[] args) {
+		Supplier<Random> s = ()-> {
+		 String otp = "";
+		 for( int i =0;i<6;i++){
+			otp = otp + (int)(Math.random()*10);
+		 }
+		};
+		
+		System.out.println(s.get());
+		System.out.println(s.get());
+		System.out.println(s.get());
+		System.out.println(s.get());
+	}	
+}
+
+================================
+Predicate ----> test() ===> Only 1 input arguements
+Function -----> apply() ===> Only 1 input arguements 
+Consumer ----> accept() ====> Only 1 input arguement 
+Supplier ----> get() ====> No input arguement
+
+All of the above Functional interface doesnt work with 2 or more number of arguements
+Check the sum of 2 given number is even or not ?
+
+Solution : BiPredicate ===> having two input arguement predicate 
+
+
+class Test {
+	
+	public static void main(String[] args) {
+		BiPredicate<Integer , Integer> p = (a,b) -> (a+b)%2==0;
+		System.out.println(p.test(10,20));
+		System.out.println(p.test(15,20));
+		// There is no concept of tripredicate or quarterpredicate 
+	}
+}
+
+Conclusion:
+Normal predicate can take only one input arguement and perform some conditional checks. 
+Sometime our programming requirement is we have to take 2 input arguement and perform 
+some conditional check, for this requirement we should go for BiPredicate.
+
+BiPredicate is exactly same as Predicate except that it will take 2 input arguements.
+
+
+interface BiPredicate<T1,T2> {
+	public boolean test(T1 t1,T2 t2);
+	//remaining default and static methods are same
+}
+
+
+class Test {
+	public static void main(String[] args) {
+		BiPredicate<Integer , Integer> p=(a,b) ->(a+b) % 2==0;
+		System.out.println(p.test(10,20)); // true
+		System.out.println(p.test(11,20)); // false 
+		
+	}
+}
+=============================================================================================
+BiFunction : It has two take 2 input arguement and return some output
+
+class Employee {
+	int eno ;
+	String name;
+	
+	Employee(String name , int eno ) {
+		this.eno = eno ;
+		this.name = name;
+		
+	}
+}
+
+import java.util.*;
+
+
+class Test {
+	public static void main(String[] args) {
+		BiFunction<Integer,String, Employee>  f = (eno,ename)-> new Employee(eno,ename);
+	// BiFunction<ARG1,ARG2,ReturnType>
+		ArrayList<Employee> l = new ArrayList<Employee>() ;
+		l.add(1,"Durga1");
+		l.add(2,"Durga2");
+		l.add(3,"Durga3");
+		l.add(4,"Durga4");
+		l.add(5,"Durga5");
+		
+		l.add(f.apply(100,"D1"));	
+		l.add(f.apply(100,"D1"));	
+		l.add(f.apply(100,"D1"));	
+		l.add(f.apply(100,"D1"));	
+		
+		for(Employee e : l){
+			System.out.println(e.eno);
+			System.out.println(e.name);
+		}
+	
+	}
+}
+
+BiFunction : 
+interface BiFunction<T,U,R> {
+	public R apply(T t ,U u) ;
+	// default method andThen()
+}
+
+
+BiConsumer :
+	
+
+class Employee {
+	String name;
+	double salary;
+	
+	Employee(String name , double salary) {
+		this.name = name;
+		this.salary = salary;
+	}
+	
+
+}
+
+class Test {
+
+	public static void populate(ArrayList<Employee> l ) {
+		l.add(new Employee("Durga1",1000));
+		l.add(new Employee("Durga2",2000));
+		l.add(new Employee("Durga3",3000));
+		l.add(new Employee("Durga4",4000));
+	}
+	public static void main(String[] args) { 
+		ArrayList<Employee> l = new ArrayList<Employee>() ;
+		populate(l);
+		BiConsumer<Employee,Double>  c =(e,d) -> e.salary = e.salary + d;
+		
+		for(Employee e : l ) {
+			c.accept(e,5000);
+		}
+		
+		for(Employee e : l ) {
+			System.out.println("Employee Name " + e.name);
+			System.out.println("Employee Salary " + e.salary);
+			System.out.println() ;
+			
+		} 
+
+
+		
+	}
+}			
+=======================================================================
+Predicate
+Function
+Consumer
+The above 3 can be used to take single arguement from the programmer
+
+BiPredicate
+BiFunction
+BiConsumer
+
+
+class Test {
+	
+	public static void main(String[] args) {
+		int[] x = {0,5,10,15,25,40};
+		Predicate<Integer> p =i->i%2==0;
+		for(int x1 : x ){
+			if(p.test(x1)) {
+				System.out.println(x1);
+			}
+		}
+	}
+}
+
+
+Why BiSupplier functional interface not available ? 
+Supplier interface method (get() method) wont take any arguements ,
+just it will supply the object to the supplier.
+
+
+========================================================================
+
+If predicate accepts Integer class object as arguement and we are supplying int datatype to it. First it must be converted into Integer class Object that compiler does automatically for us (AutoBoxing). 
+
+Similarly when this Integer object has to be supplied inside the body then 
+we required int datatype value . Thus the conversion of Integer type object 
+to the int type value is also done by the compiler automatically (AutoUnBoxing). 
+
+In both of the conversion there is some time spent. If we have to perform this operation a large number of time then definately its a perform issue or not ? Yes its a performance issue
+
+Solution : Primitive version of Functional interfaces ;
+
+Instead of Predicate<Integer>  use IntPredicate 
+Type parameter is not required because it bydefault accepts int datatype value.
+In this example no conversions are happening so program performance will be increased.
+
+Primitive Predicate Types:
+IntPredicate
+DoublePredicate
+LongPredicate
+
+Same applies for the function :
+
+
+Example :
+
+class Test {
+	
+	public static void main(String[] args) {
+		Function<Integer , Integer > f = i->i*i;
+		System.out.println(f.apply(4));
+
+	}
+}	
+
+int ===> Integer ===> int   =====> Conversion of arguement needs time
+
+BiPredicate ===> is used for 2 arguements there is no IntBiPredicate like concept ===> Not applicable in java
+
+
+==========================================================================
+Primitive Type Function:
+
+DoubleFunction : can take input type as double
+				 return type can be anytype.
+
+				 Refer Java 8 APIS for more Information
+
+IntFunction : can take int type as input
+			  return type can be anytype 
+
+LongFunction : can take long type as input
+				return type can be any datatype.
+
+DoubletoIntFunction ===> Input type : double
+						 Return Type : int							 
+
+
+DoubletoLongFunction ===> input type : double
+						  return type : long
+						  applyAsLong(double)
+
+IntToDoubleFunction ===> applyAsDouble()
+
+Explore API For more Information
+
+
+ToIntFunction ---- Return type is int 
+                   input can be anything
+
+ToLongFunction 
+
+ToDoubleFunction
+---------------------------------------------------------
+
+
+
+ToDoubleBiFunction ==return type must be int typ but inputs can be anytype
+		int applyAsDouble(T t , U u)
+ToIntBiFunction 
+		int applyAsInt(T t , U u)
+Applies this function to the given arguement
+
+ToLongBiFunction 
+		int applyAsDouble(T t ,U u) 
+
+Applies this function to the given arguements 
+
+Example :
+	
+class Test {
+	public static void main(String[] args) {
+		ToIntFunction<String> f = s->s.length();
+		System.out.println(f.applyAsInt("durga"));
+	
+		Function<Integer ,Double> f = i->Math.sqrt(i);
+		System.out.println(f.apply(12)) ; 3....
+
+		IntToDoubleFunction f = i->Math.sqrt(i);
+		System.out.println(f.applyAsDouble(9));
+
+
+	}
+}	
+========================================================================
+Primitive Types for consumer Functional Interface
+
+IntConsumer
+	void accept(int value)
+	Performs operation on the given arguement
+
+LongConsumer 
+
+DoubleConsumer
+
+===========================================================================
+
+ObjDoubleConsumer<T>
+   One arguement is T (any) type and one arguement is double type.
+   void accept(T t , double value)
+
+
+ObjIntConsumer<T>
+   One arguement is T (any) type and one arguement is int type.
+   void accept(T t , int value)    
+
+=============================================================================
+Primitive Types for Supplier 
+Boolean Supplier ==> Supply Boolean value
+			boolean getAsBoolean() 
+
+IntSupplier 
+			int getAsInt()
+
+LongSupplier 
+			long getAsLong() 			 			
+
+============================================================================
+There are 2 predined functional Interfaces are there 
+
+
+class Test {
+	
+	public static void main(String[] args) {
+		Function<Integer , Integer >  f = i-> i*i;
+		System.out.println(f.apply(5));
+
+
+	}
+
+}
+
+
+If the input and output type are same then dont use Function.
+UnaryOperator is the solution to the above problem
+
+
+class Test {
+	
+	public static void main(String[] args) {
+		UnaryOperator<Integer>  f = i-> i*i;
+		System.out.println(f.apply(5));
+		// If input and output type are same type then we should go for unary operator.
+
+
+	}
+
+}
+
+================================================================================
+Primitive Types of the UnaryOperator are :
+IntUnaryOperator :
+	public int applyAsInt(int i) ;
+
+
+class Test {
+	
+	public static void main(String[] args) {
+		IntUnaryOperator  f = i-> i*i;
+		System.out.println(f.applyAsInt(5)); // applyAsInt is the methodName
+
+
+
+	}
+
+}
+
+LongUnaryOperator :
+	public	long applyAsLong(long l ) 
+
+
+class Test {
+	
+	public static void main(String[] args) {
+		Function<Integer , Integer >  f = i-> i*i;
+		System.out.println(f.apply(5));
+
+
+	}
+
+}
+
+DoubleUnaryOperator:
+	public double applyAsDouble(double d)	
+
+================================================================================
+BinaryOperator : If both inputs are always same then better to use Binary operator.
+
+It is the child of BinaryFunction <T,T,T> 
+			Inputs are same type and output is also same.
+
+BinaryOperator<T>
+	public T apply(T,T)
+
+
+class Test {
+	
+	public static void main(String[] args) {
+		BiFunction<String , String , String >  f = (s1,s2)-> s1+s2;
+		System.out.println(f.apply("Durga" , "Soft"));
+
+		BinaryOperator<String> b = (b1,b2) -> b1+b2;
+		System.out.println(b.apply("Durga " ,"Purushottam"));
+
+        IntBinaryOperator m = (b1,b2) -> b1*b2;
+		System.out.println(m.applyAsInt(20,20));
+
+
+		
+		
+	}
+
+}
+
+class Test {
+	
+	public static void main(String[] args) {
+		BiFunction<String , String , String >  f = (s1,s2)-> s1+s2;
+		System.out.println(f.apply("Durga" , "Soft"));
+
+		BinaryOperator<String> b = (b1,b2) -> b1+b2;
+		System.out.println(b.apply("Durga " ,"Purushottam"));
+
+        IntBinaryOperator m = (b1,b2) -> b1*b2;
+		System.out.println(m.applyAsInt(20,20));
+
+		IntUnaryOperator f1 = i-> i+1;
+		System.out.println(f1.applyAsInt(4)); // 5
+
+		IntUnaryOperator f2 = i -> i*i;
+		System.out.println(f2.applyAsInt(5)); 25
+
+		System.out.println(f1.andThen(f2).applyAsInt(4)); // (4 + 1)(4 + 1)
+			
+
+
+		
+	}
+
+}
+
+
+==========================================================
+
+Method and constructor reference :
+Function<String ,Integer> f =s->s.length();
+
+Alterative for lambda expression : 
+	
+class Test {
+	
+	public static void m1() {
+		for(int i =0;i<10;i++) {
+		System.out.println("Child Thread of m1() method");
+		}
+	}
+
+	public static void main(String[] args) {
+		Runnable r = Test::m1;  // Method reference Operator
+		Thread th = new Thread(r);
+		th.start();
+
+		for(int i =0;i<10;i++) {
+			System.out.println("Main Thread-1");
+		}
+
+
+
+	}
+}	
+
+Functional interface can be used to refer method by using method resolution operator:: 
+Already existing methods are reused ===> Enhances code resuability
+
+Is it compulsory a static method or can we take instance method also ?
+Both instance and static methods can be referred 
+
+Syntax :
+	Classname :: staticmethodname
+	objectreference :: nonstaticmethodname
+
+
+
+class Test  {
+	
+	public  void m1() {
+		for(int i =0;i<10;i++) {
+		System.out.println("Child Thread of m1() method");
+		}
+	}
+
+	public static void main(String[] args) {
+		Runnable r = new Test()::m1;  // Method reference Operator
+		Thread th = new Thread(r);
+		th.start();
+
+		for(int i =0;i<10;i++) {
+			System.out.println("Main Thread-1");
+		}
+
+	// Only one restriction is there
+	// The arguement must match 
+	// There is no restriction on method name 
+	// There is no restriction on modifier type
+	// There is no restriction on return type.
+	
+
+	}
+}	
+
+==============================================================================
+
+interface Interf {
+	public void add(int a , int b);
+
+}
+
+class Test {
+	
+	public void sum(int x ,int y) {
+		System.out.println("The sum : " + (x+y));
+	}
+
+	public static void main(String[] args) {
+  		
+  		Interf i =(a,b)-> System.out.println("The sum :  " + (a+b));
+  		i.add(10,20);
+
+  		Interf i1 = Test::sum; // Referencing static method
+  		i1.add(30,20);  
+
+  		// The number of arguements should match..
+
+	}
+
+}
+// If the implementation is already available ==> go for method reference 
+// It the implementation is not already available ===> go for constructor reference 
+// 
+
+Constructor reference syntax :
+	Test::new
+
+class Sample {
+	Sample() {
+		System.out.println("Sample class Constructor ");
+	}
+
+}	
+
+interface Interf {
+	public Sample get();
+}
+
+class Test {
+	public static void main(String[] args) {
+		Interf i = Sample::new;
+		Sample s1 = i.get();
+		Sample s2 = i.get();
+		Sample s3 = i.get();
+		Sample s4 = i.get(); 
+	
+	}
+}
+
+Here interface Interf get() method refers Sample class Constructor .
+
+
+=======================================
+class Sample {
+	Sample() {
+		System.out.println("Sample class Constructor ");
+	}
+
+}	
+
+interface Interf {
+	public Sample get();
+}
+
+class Test {
+	public static void main(String[] args) {
+		Interf i = Sample::new;
+		Sample s1 = i.get("Durga");
+		Sample s2 = i.get("Soft");	
+	}
+}
+
+
+If there are multiple constructors in the refer Class then the matched arguement will be called and then 
+
+
+
+========================================
+
+Comparator ---> compare (obj1 ,obj2)
+returns +ve iff obj1 has to come before obj2
+returns -ve iff obj1 has to come after obj2
+return  0 if obj1 is equal to obj2
+
+Descending order 
+
+10, 20
+
+(i1,i2)  -> (i1<i2) ? 1 :(i1>i2) ? -1:0
+
+
+
+
+
+
+
+

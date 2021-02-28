@@ -1,0 +1,312 @@
+    1  ls
+    2  git --version
+    3  ls
+    4  pwd
+    5  mkdir gitprojects
+    6  ls
+    7  cd gitprojects/
+    8  ls
+    9  mkdir project1
+   10  cd project1/
+   11  ls
+   12  ls
+   13  cat file1.txt
+   14  cat > file1.txt
+   15  cat file1.txt 
+   16  cat > file2.txt
+   17  cat file1.txt 
+   18  cat file2.txt 
+   19  git status
+   20  ls
+   21  git init
+   22  ls
+   23  ls -la
+   24  ls -a
+   25  git status
+   26  git add file1.txt 
+   27  git status
+   28  git commit;
+   29  git config --global user.email "purushottamkaushik96@gmail.com"
+   30  git config --global user.name "purushottamkaushik96"
+   31  git commit -m "Added two files === file1.txt file2.txt to the repository"
+   32  git status
+   33  git add file2.txt 
+   34  git commit -m "Adding seccond file to the repository"
+   35  git status
+   36  cat > file1.txt
+   37  git commit -m "Git commit from user cat > file1.txtcat > file1.txt" 
+   38  git add file1.txt
+   39  git commit -m "Git commit from user cat > file1.txtcat > file1.txt" 
+   40  git status
+   41  cat > file1.txt
+   42  git commit -m "Git commit from user cat > file1.txtcat > file1.txt" 
+   43  git commit -m "ANother commit using Lakshay"
+   44  git add file1.txt
+   45  git commit -m "ANother commit using Lakshay"
+   46  git log
+   47  git init
+   48  ls
+   49  cls
+   50  clear
+   51  pwd
+   52  ls
+   53  ll
+   54  git commit -m "Message from Pursuhotam"
+   55  cat > file3.txt
+   56  git commit 
+   57  git commit -m "nothing to track"
+   58  git add file3.txt 
+   59  git status
+   60  git commit -m "File 3 Added to the repository"
+   61  git log
+   62  history
+   63  git log
+   64  git
+   65  git add
+   66  ls
+   67  cat > file4.txt
+   68  cat > file5.txt
+   69  git status
+   70  git
+   71  git help -a
+   72  ls
+   73  git status -a
+   74  git status -s # for short information
+   75  ls
+   76  git status --short # for short information
+   77  git status
+   78  cat > file6.txt
+   79  ls
+   80  cat file6.txt 
+   81  git status
+   82  git status -s
+   83  git add . # Add all files of current working directory
+   84  git status -s
+   85  git commit -m "File6 Added to the repository"
+   86  git status
+   87  git log
+   88  git log | tail
+   89  git log | grep "file6"
+   90  git log
+   91  git log | grep "File6"
+   92  git log | grep -i "file6"
+   93  notepad
+   94  notepad hello.txt
+   95  notepad hello1.txt
+   96  git status
+   97  git add .
+   98  git status
+   99  git add .
+  100  git add . # Adding to the stacking area for further commit to be done
+  101  git status
+  102  git commit -a
+  103  git
+  104  git help commit
+  105  git commit help
+  106  git commit help -a
+  107  git help -a
+  108  git commit
+  109  git commit -m "Committed using the file command"
+  110  sir
+  111  git log
+  112  echo -n "f472e4a841855337c910dacf464830cbfe48d67d"
+  113  echo "f472e4a841855337c910dacf464830cbfe48d67d"
+  114  echo "f472e4a841855337c910dacf464830cbfe48d67d" | wc
+  115  echo "f472e4a841855337c910dacf464830cbfe48d67d" | wc -c
+  116  echo 
+  117  man echo
+  118  echo --help
+  119  echo 
+  120  echo -n
+  121  echo -n "f472e4a841855337c910dacf464830cbfe48d67d" | wc -c
+  122  history
+  123  git status
+  124  git commit -a -m "Both files demo1 and demo2 committed"
+  125  git commit -a -m "Both files demo1 and demo2 committed" # Failed command 
+  126  git commit -am "Both files demo1 and demo2 committed" # Failed command 
+  127  git commit -am "Both files demo1 and demo2 committed" # Failed command 
+  128  git add .
+  129  git commit -am "Both files demo1 and demo2 committed" # Failed command 
+  130  git log
+  131  git log --help
+  132  git config --list
+  133  git config --list # to get git configurations
+  134  git config username
+  135  git config --username
+  136  git config 
+  137  git config 
+  138  git config --list # to get git configurations
+  139  git config user.email
+  140  git config user.email # to get email of the configured global user
+  141  git config user.name # to get name of the configured global user
+  142  # We can access the properties by using only the property name after git config in the command
+  143  history
+  144  git ls-files # all files that are tracked by git.
+  145  cat > demo3.txt
+  146  git status
+  147  git ls-files # all files that are tracked by git.
+  148  git add .
+  149  git ls-files # all files that are tracked by git.
+  150  git ls-files
+  151  git log
+  152  git log file1.txt # Shows log related to file basically commits made on file1
+  153  git log
+  154  git log and git log
+  155  git log file2.txt
+  156  git log --online # to see information easily when you have a large number of commits using git commit -m "Commit message" Command
+  157  git log --oneline # to see information easily when you have a large number of commits using git commit -m "Commit message" Command
+  158  git log -n 2 # to show all the n commits as log and display at the console
+  159  git log --grep="Added" --oneline # Commits filtering using --grep option and displaying it short by using --oneline switch
+  160  git log
+  161  git log --since="2020-11-10"
+  162  git log --since="2020-11-10"
+  163  git log --after="2020-11-10"
+  164  git log --after="10-11-2020"
+  165  git log --since="10-11-2020"
+  166  cls
+  167  clear
+  168  git commit --author="purushottam"
+  169  git log --author="purushottam"
+  170  git log --author="purushotta" # Regex Match
+  171  git log --author="hima" # Shows nothing
+  172  git log --author="purush"
+  173  git log --decorate -n 2# To provide some extra information in logs
+  174  git log --decorate --n 2# To provide some extra information in logs
+  175  git log --decorate# To provide some extra information in logs
+  176  git log --decorate --oneline# To provide some extra information in logs
+  177  git log --decorate --oneline # To provide some extra information in logs
+  178  git log --decorate --oneline  -n 2 # To provide some extra information in logs
+  179  git log --decorate # To provide some extra information in logs
+  180  ls
+  181  git commit -m "JustForFunCommit"
+  182  git status
+  183  git status
+  184  git add .
+  185  git status
+  186  git commit -m "GIT FIRST COMMIT FOR DIFF COMMANDS" # Simple Commit Operation
+  187  git status
+  188  git commit -m "GIT SECOND COMMIT FOR DIFF COMMANDS" # Simple 2nd Commit Operation
+  189  git add .
+  190  git commit -m "GIT SECOND COMMIT FOR DIFF COMMANDS" # Simple 2nd Commit Operation
+  191  git add file1.txt 
+  192  git status
+  193  git diff file1.txt # To see the difference the filename in staging area and working directory
+  194  history >> /d/githistory.txt
+  195  cd d/
+  196  cd ..
+  197  cd ..
+  198  ls
+  199  notepad githistory.txt 
+  200  cd gitprojects/
+  201  ls
+  202  cd project1/
+  203  ls
+  204  clear
+  205  poweroff
+  206  exit
+  207  p4merge
+  208  git config
+  209  git config --global
+  210  git config --global --list
+  211  git config --global --list # global configurations for git software or Distributed VCS
+  212  git config --global diff.tool=p4merge
+  213  git config --global diff.tool p4merge # Setting diff tool as p4merge
+  214  git config --global --list # global configurations for git software or Distributed VCS
+  215  git config --global difftool.p4merge.path "C:\Program Files\Perforce\Perforce.exe" # Setting diff tool as p4merge
+  216  git config --global difftool.p4merge.path "C:\Program Files\Perforce\Perforce.exe" # Setting diff tool path as the installed location of p4merge
+  217  git config --global --list
+  218  git config --global --list
+  219  git config --global merge.tool p4merge
+  220  git config --global mergetool.p4merge.path "C:\Program Files\Perforce\Perforce.exe\" # Its similar to previous command
+  221  ;
+  222  qq
+  223  git config --global mergetool.p4merge.path "C:\Program Files\Perforce\Perforce.exe" # Its similar to previ
+  224  git config --global mergetool.prompt false
+  225  git config --global difftool.prompt false
+  226  # We have set the prompt of both the tools as disabled
+  227  git config --global --list
+  228  git diff file1.txt
+  229  git difftool file1.txt
+  230  difftool
+  231  p4merge
+  232  git config --global --list
+  233  git config --global mergetool.p4merge.path "C:\Program Files\Perforce\p4merge.exe" # Its similar to previ
+  234  git config --global difftool.p4merge.path "C:\Program Files\Perforce\p4merge.exe" # Setting diff tool path as the installed location of p4merge
+  235  git config --global --list
+  236  git difftool file1.txt
+  237  git difftool file1.txt
+  238  git difftool --staged HEAD file1.txt
+  239  git difftool --staged HEAD file1.txt # Difference between staging area and last commit
+  240  git diff --staged HEAD file1.txt # Difference between staging area and last commit
+  241  git diff --staged
+  242  git diff file1.txt
+  243  git diff --stagged HEAD file1.txt # Difference between the commit and stagged code
+  244  git diff --staged HEAD file1.txt # Difference between the commit and staged code (Command That works)
+  245  git diff file1.txt
+  246  git difftool file1.txt
+  247  git difftool --staged HEAD file1.txt
+  248  git log --oneline
+  249  git diff f05604e 1c7e465 
+  250  git difftool f05604e 1c7e465 
+  251  git rm --cached file1.txt # Remove from stage area
+  252  git rm --cached -f file1.txt # Remove from stage area
+  253  git status
+  254  git rm file1.txt 
+  255  ls
+  256  git rm file1.txt 
+  257  rm file1.txt 
+  258  ls
+  259  cat > file1.txt
+  260  cat file1.txt 
+  261  git log --oneline
+  262  git diff f05604e 1c7e465 
+  263  git difftool f05604e 1c7e465 
+  264  lsd
+  265  ls
+  266  git difftool f05604e 1c7e465 # to check information change between the 2 commits.
+  267  git status
+  268  git rm file1.txt 
+  269  rm file1.txt 
+  270  git status
+  271  git commit -m "File1.txt Deleted Successfully"
+  272  git status
+  273  git add .
+  274  ls
+  275  cat demo2.txt
+  276  cat > demo4.txt
+  277  cat demo4.txt
+  278  git status
+  279  git add .
+  280  git status
+  281  git rm --cached demo4.txt 
+  282  git status
+  283  git rm --cached demo4.txt  # removing from the stashed area.
+  284  git add .
+  285  git rm --cached demo4.txt  # removing from the stashed area.
+  286  git status
+  287  rm demo4.txt 
+  288  git status
+  289  git status
+  290  ls
+  291  git ls-files
+  292  git ls -files
+  293  git ls-files
+  294  cat >  demo4.txt
+  295  git add .
+  296  git rm demo4.txt 
+  297  git status
+  298  git rm --cached demo4.txt
+  299  git status
+  300  git rm --cached demo4.txt # Removing from the stagged area not from the working directory
+  301  git add .
+  302  git rm --cached demo4.txt # Removing from the stagged area not from the working directory
+  303  git add .
+  304  git status
+  305  rm demo4.txt # Removing from the staged area not from the working directory
+  306  rm -r # To delete all the files from the working directory
+  307  rm -rf # To delete all the files from the working directory
+  308  git rm -r # To delete all the files from the working directory
+  309  git rm -r . # To delete all the files from the working directory
+  310  git rm -r . # To delete all the files from the working directory
+  311  history
+  312  history > /d/gitHistoryUpdated.txt

@@ -1,0 +1,60 @@
+public class Codebeautify {
+ private String gstin;
+ private String fp;
+ ArrayList < Object > b2b = new ArrayList < Object > ();
+ ArrayList < Object > cdnr = new ArrayList < Object > ();
+ ArrayList < Object > txpd = new ArrayList < Object > ();
+ ArrayList < Object > at = new ArrayList < Object > ();
+ ArrayList < Object > b2bur = new ArrayList < Object > ();
+ ArrayList < Object > imp_s = new ArrayList < Object > ();
+ Txos TxosObject;
+ ArrayList < Object > b2ba = new ArrayList < Object > ();
+ ArrayList < Object > b2bura = new ArrayList < Object > ();
+ ArrayList < Object > imp_sa = new ArrayList < Object > ();
+ ArrayList < Object > cdnra = new ArrayList < Object > ();
+ ArrayList < Object > cdnura = new ArrayList < Object > ();
+ ArrayList < Object > txosa = new ArrayList < Object > ();
+ ArrayList < Object > ata = new ArrayList < Object > ();
+ ArrayList < Object > txpda = new ArrayList < Object > ();
+
+
+ // Getter Methods 
+
+ public String getGstin() {
+  return gstin;
+ }
+
+ public String getFp() {
+  return fp;
+ }
+
+ public Txos getTxos() {
+  return TxosObject;
+ }
+
+ // Setter Methods 
+
+ public void setGstin(String gstin) {
+  this.gstin = gstin;
+ }
+
+ public void setFp(String fp) {
+  this.fp = fp;
+ }
+
+ public void setTxos(Txos txosObject) {
+  this.TxosObject = txosObject;
+ }
+}
+public class Txos {
+ ArrayList < Object > itms = new ArrayList < Object > ();
+
+
+ // Getter Methods 
+
+
+
+ // Setter Methods 
+
+
+}
